@@ -1,0 +1,14 @@
+# Settings in the [build] context are global and are applied to all contexts 
+# unless otherwise overridden by more specific contexts.  
+[build]
+command = "CI= yarn build"
+# Directory to change to before starting a build. 
+# This is where we will look for package.json/.nvmrc/etc.
+base = "/"
+
+# The following redirect is intended for use with most SPAs that handle
+# routing internally.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
