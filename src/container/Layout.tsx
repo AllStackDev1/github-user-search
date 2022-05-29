@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <Box fontFamily="inherit" bg={color} minH="100vh">
       <Navbar />
-      <Container mt={16} as="main" minW={{ lg: 'xl', '2xl': '6xl' }}>
+      <Container mt={16} pb={5} as="main" minW={{ lg: 'xl', '2xl': '6xl' }}>
         <Outlet />
       </Container>
     </Box>

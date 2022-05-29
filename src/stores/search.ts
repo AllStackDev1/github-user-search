@@ -3,19 +3,12 @@ import QueryString from 'query-string';
 // import { persist } from 'zustand/middleware';
 
 import { searchUsers } from 'services/search';
-import { ISearchPayload } from './types';
-
-export interface ISearchStore {
-  error?: string;
-  isLoading?: boolean;
-  query?: { q: string };
-  data: ISearchPayload | null;
-  search: (query: { q: string }) => Promise<void>;
-}
+import { ISearchStore } from './types';
 
 export const searchStore = create<ISearchStore>((set) => ({
   data: null,
   isLoading: false,
+  query: { page: 1, per_page: 20 },
   search: async (query) => {
     try {
       set(() => ({ isLoading: true }));

@@ -115,7 +115,7 @@ const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
         <Flex
           role="button"
           align="center"
-          color="blue.300"
+          color="brand.blue.link"
           onClick={() => onToggle()}
         >
           <Icon as={FiChevronsLeft} />

@@ -60,3 +60,16 @@ export interface IUserInfo {
   created_at: string;
   updated_at: string;
 }
+
+export interface IQueryPayload {
+  q?: string;
+  page: number;
+  per_page: number;
+}
+export interface ISearchStore {
+  error?: string;
+  isLoading?: boolean;
+  query: IQueryPayload;
+  data: ISearchPayload | null;
+  search: (query: IQueryPayload) => Promise<void>;
+}

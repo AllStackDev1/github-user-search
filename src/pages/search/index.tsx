@@ -16,15 +16,17 @@ const Search = (): JSX.Element => {
 
   useEffect(() => {
     if (search) {
-      triggerReload(qs.parse(search) as any);
+      const qq = qs.parse(search) as any;
+      triggerReload({ ...query, ...qq });
     }
-  }, [search, triggerReload]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
 
   useSetPageTitle(query?.q ? `Code . ${query?.q}` : 'Code Search User');
 
   return (
     <Box px={20}>
-      {data ? <SearchResults data={data} /> : <SearchComp />}
+      {data ? <SearchResults /> : <SearchComp />}
       <Footer />
     </Box>
   );

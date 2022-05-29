@@ -80,7 +80,7 @@ const Footer = () => {
             key={m.link}
             as={ReachRouter}
             fontWeight={600}
-            color="blue.300"
+            color="brand.blue.link"
           >
             {m.name}
           </Link>

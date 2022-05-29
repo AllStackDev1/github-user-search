@@ -22,7 +22,7 @@ const SmallInfo: FC<{
       <Flex
         role="button"
         align="center"
-        color="blue.300"
+        color="brand.blue.link"
         onClick={() => onToggle()}
       >
         <Text as="span">more</Text>

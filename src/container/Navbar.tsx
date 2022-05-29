@@ -102,7 +102,9 @@ const Navbar: FC = () => {
                 placeholder="Search or jump to..."
                 borderColor="rgba(255,255,255, 0.25)"
                 onChange={(e) => setSearchKey(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && search({ q: searchKey })}
+                onKeyDown={(e) =>
+                  e.key === 'Enter' && search({ ...query, q: searchKey })
+                }
                 _placeholder={{ color: 'gray.400', fontSize: 'sm' }}
               />
               <InputRightElement h={9}>
