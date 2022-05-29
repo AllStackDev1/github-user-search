@@ -96,7 +96,7 @@ const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
           )}
           {data?.twitter_username && (
             <Link
-              href={`www.twitter.com/${data.twitter_username}`}
+              href={`https://www.twitter.com/${data.twitter_username}`}
               rel="noreferrer"
               target="_blank"
             >

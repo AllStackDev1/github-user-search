@@ -1,3 +1,4 @@
+import 'assets/css/custom.css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';

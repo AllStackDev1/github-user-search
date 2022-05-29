@@ -8,12 +8,11 @@ import {
   Container,
 } from '@chakra-ui/react';
 import { FC } from 'react';
+import pluralize from 'pluralize';
 import ReactPaginate from 'react-paginate';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import { searchStore } from 'stores/search';
 import UserDetails from './UserDetails';
-
-import 'assets/css/custom.css';
 
 const PageButton: FC<{ title: string } & ButtonProps> = ({
   title,
@@ -40,7 +39,7 @@ const SearchResults = () => {
     <Box pt={10}>
       <Stack spacing={3} divider={<Divider />}>
         <Heading fontWeight={600} fontSize="xl">
-          {data?.total_count} users found
+          {data?.total_count} {pluralize('user', 0)} found
         </Heading>
 
         <Stack py={4} spacing={4} divider={<Divider />}>
