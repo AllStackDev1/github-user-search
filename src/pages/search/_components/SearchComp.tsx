@@ -16,16 +16,17 @@ import { Link as ReactLink } from 'react-router-dom';
 import { searchStore } from 'stores/search';
 
 const SearchComp = () => {
-  const { search } = searchStore();
+  const buttonColor = useColorModeValue('brand.200', 'brand.100');
+  const { search, query } = searchStore();
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm();
+  } = useForm({
+    defaultValues: { q: query?.q || '' },
+  });
 
-  const onSubmit = (data) => search(data);
-
-  const buttonColor = useColorModeValue('brand.200', 'brand.100');
+  const onSubmit = (payload: any) => search(payload);
 
   return (
     <Box p={20}>
@@ -56,7 +57,6 @@ const SearchComp = () => {
             type="submit"
             borderWidth={1}
             bg={buttonColor}
-            // isDisabled={!isDirty}
             isLoading={isSubmitting}
           >
             Search

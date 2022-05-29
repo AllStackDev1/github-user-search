@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import axios from 'axios';
-import QueryString from 'query-string';
+import qs from 'query-string';
 
 import { GITHUB_BASE_API } from './envs';
 
@@ -62,7 +62,7 @@ class HttpFacade {
   };
 
   get = async ({ url, query = {} }: IGet) => {
-    const queryString = `?${QueryString.stringify(query)}`;
+    const queryString = `?${qs.stringify(query)}`;
     const response = await this.http.get(`${url + queryString}`);
     return response.data;
   };

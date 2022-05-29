@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -21,9 +21,13 @@ import MotionBox from 'components/MotionBox';
 import Logo32 from 'assets/images/GitHub-Mark-Light-32px.png';
 import Logo64 from 'assets/images/GitHub-Mark-Light-64px.png';
 
+import { searchStore } from 'stores/search';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 const Navbar: FC = () => {
+  const [searchKey, setSearchKey] = useState('');
+  const { query, search } = searchStore((e) => e);
+
   const [inputTouched, setInputTouched] = useState(false);
 
   const menus = [
@@ -54,6 +58,12 @@ const Navbar: FC = () => {
     },
   };
 
+  useEffect(() => {
+    if (query?.q) {
+      setSearchKey(query?.q);
+    }
+  }, [query]);
+
   return (
     <Flex
       as="nav"
@@ -79,34 +89,40 @@ const Navbar: FC = () => {
           </Box>
         </Link>
 
-        <MotionBox
-          onFocus={() => setInputTouched(true)}
-          onBlur={() => setInputTouched(false)}
-          {...motionProps}
-        >
-          <InputGroup>
-            <Input
-              h={9}
-              placeholder="Search or jump to..."
-              _placeholder={{ color: 'gray.400', fontSize: 'sm' }}
-            />
-            <InputRightElement h={9}>
-              <Flex
-                h={5}
-                w={5}
-                rounded="sm"
-                fontSize="xs"
-                align="center"
-                justify="center"
-                borderWidth={1}
-                color="rgba(255,255,255, 0.25)"
+        {query?.q && (
+          <MotionBox
+            onFocus={() => setInputTouched(true)}
+            onBlur={() => setInputTouched(false)}
+            {...motionProps}
+          >
+            <InputGroup>
+              <Input
+                h={9}
+                value={searchKey}
+                placeholder="Search or jump to..."
                 borderColor="rgba(255,255,255, 0.25)"
-              >
-                /
-              </Flex>
-            </InputRightElement>
-          </InputGroup>
-        </MotionBox>
+                onChange={(e) => setSearchKey(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && search({ q: searchKey })}
+                _placeholder={{ color: 'gray.400', fontSize: 'sm' }}
+              />
+              <InputRightElement h={9}>
+                <Flex
+                  h={5}
+                  w={5}
+                  rounded="sm"
+                  fontSize="xs"
+                  align="center"
+                  justify="center"
+                  borderWidth={1}
+                  color="rgba(255,255,255, 0.25)"
+                  borderColor="rgba(255,255,255, 0.25)"
+                >
+                  /
+                </Flex>
+              </InputRightElement>
+            </InputGroup>
+          </MotionBox>
+        )}
 
         <HStack spacing={3}>
           {menus.map((m) => (
