@@ -23,7 +23,7 @@ const SearchComp = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm({
-    defaultValues: { q: query?.q || '' },
+    defaultValues: { ...query, q: query?.q || '' },
   });
 
   const onSubmit = (payload: any) => search(payload);

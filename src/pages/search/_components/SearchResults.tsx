@@ -26,7 +26,7 @@ const PageButton: FC<{ title: string } & ButtonProps> = ({
     borderWidth={0}
     variant="outline"
     color="brand.blue.link"
-    _hover={{ borderWidth: 1 }}
+    _hover={{ bg: 'transparent' }}
     {...rest}
   >
     {title}

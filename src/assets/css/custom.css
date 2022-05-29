@@ -25,7 +25,7 @@
 }
 
 .pagination .active {
-    background-color: #175CFF;
+    background-color: #2c8bf9;
     color: white;
 }
 
@@ -37,7 +37,7 @@
 .pagination .previous.disabled:hover,
 .pagination .previous.disabled button:hover,
 .pagination .next.disabled:hover,
-    .pagination .next.disabled button:hover {
+.pagination .next.disabled button:hover {
     border-width: 0;
 }
 
