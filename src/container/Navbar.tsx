@@ -25,9 +25,7 @@ import { searchStore } from 'stores/search';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 const Navbar: FC = () => {
-  const [searchKey, setSearchKey] = useState('');
-  const { query, search } = searchStore((e) => e);
-
+  const { query, search, searchKey } = searchStore((e) => e);
   const [inputTouched, setInputTouched] = useState(false);
 
   const menus = [
@@ -60,7 +58,7 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     if (query?.q) {
-      setSearchKey(query?.q);
+      searchStore.setState({ searchKey: query?.q });
     }
   }, [query]);
 
@@ -101,7 +99,9 @@ const Navbar: FC = () => {
                 value={searchKey}
                 placeholder="Search or jump to..."
                 borderColor="rgba(255,255,255, 0.25)"
-                onChange={(e) => setSearchKey(e.target.value)}
+                onChange={(e) =>
+                  searchStore.setState({ searchKey: e.target.value })
+                }
                 onKeyDown={(e) =>
                   e.key === 'Enter' && search({ ...query, q: searchKey })
                 }

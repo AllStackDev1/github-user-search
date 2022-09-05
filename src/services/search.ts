@@ -5,5 +5,5 @@ export const searchUsers = async (
   query: IQueryPayload
 ): Promise<ISearchPayload> => http.get({ url: '/search/users', query });
 
-export const getUserInfo = async (username: string): Promise<IUserInfo> =>
+export const getUser = async (username: string): Promise<IUserInfo> =>
   http.get({ url: `/users/${username}` });

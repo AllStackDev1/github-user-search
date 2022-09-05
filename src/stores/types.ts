@@ -70,6 +70,9 @@ export interface ISearchStore {
   error?: string;
   isLoading?: boolean;
   query: IQueryPayload;
+  searchKey: string;
   data: ISearchPayload | null;
+  userInfo?: IUserInfo | null;
+  getUser: (username: string) => Promise<void>;
   search: (query: IQueryPayload) => Promise<void>;
 }
