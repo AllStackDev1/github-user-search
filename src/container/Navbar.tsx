@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import { FC, useEffect, useState } from 'react';
+// import { stringify } from 'query-string';
 import {
   Box,
   Flex,
@@ -21,11 +23,11 @@ import MotionBox from 'components/MotionBox';
 import Logo32 from 'assets/images/GitHub-Mark-Light-32px.png';
 import Logo64 from 'assets/images/GitHub-Mark-Light-64px.png';
 
-import { searchStore } from 'stores/search';
+import { githubStore } from 'stores/github';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 const Navbar: FC = () => {
-  const { query, search, searchKey } = searchStore((e) => e);
+  const { query, search, searchKey } = githubStore((e) => e);
   const [inputTouched, setInputTouched] = useState(false);
 
   const menus = [
@@ -58,9 +60,9 @@ const Navbar: FC = () => {
 
   useEffect(() => {
     if (query?.q) {
-      searchStore.setState({ searchKey: query?.q });
+      githubStore.setState({ searchKey: query?.q });
     }
-  }, [query]);
+  }, [searchKey, query?.q]);
 
   return (
     <Flex
@@ -100,7 +102,7 @@ const Navbar: FC = () => {
                 placeholder="Search or jump to..."
                 borderColor="rgba(255,255,255, 0.25)"
                 onChange={(e) =>
-                  searchStore.setState({ searchKey: e.target.value })
+                  githubStore.setState({ searchKey: e.target.value })
                 }
                 onKeyDown={(e) =>
                   e.key === 'Enter' && search({ ...query, q: searchKey })

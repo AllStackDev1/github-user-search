@@ -6,12 +6,13 @@ import {
   Divider,
   ButtonProps,
   Container,
+  Flex,
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import pluralize from 'pluralize';
 import ReactPaginate from 'react-paginate';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
-import { searchStore } from 'stores/search';
+import { githubStore } from 'stores/github';
 import UserDetails from './UserDetails';
 
 const PageButton: FC<{ title: string } & ButtonProps> = ({
@@ -33,14 +34,20 @@ const PageButton: FC<{ title: string } & ButtonProps> = ({
 );
 
 const SearchResults = () => {
-  const { data, query, search } = searchStore((e) => e);
+  const { data, query, search, clear } = githubStore((e) => e);
 
   return (
     <Box pt={10}>
       <Stack spacing={3} divider={<Divider />}>
-        <Heading fontWeight={600} fontSize="xl">
-          {data?.total_count} {pluralize('user', 0)} found
-        </Heading>
+        <Flex align="center" justify="space-between">
+          <Heading fontWeight={600} fontSize="xl">
+            {data?.total_count} {pluralize('user', 0)} found
+          </Heading>
+
+          <Button colorScheme="twitter" onClick={() => clear()}>
+            Reset All
+          </Button>
+        </Flex>
 
         <Stack py={4} spacing={4} divider={<Divider />}>
           {data?.items.map((item) => (

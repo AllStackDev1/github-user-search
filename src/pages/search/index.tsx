@@ -3,16 +3,16 @@ import qs from 'query-string';
 import { Box } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 
-import useSetPageTitle from 'hooks/useSetPageTitle';
-import { searchStore } from 'stores/search';
+import { githubStore } from 'stores/github';
 
+import { appStore } from 'stores/app';
 import Footer from './_components/Footer';
 import SearchComp from './_components/SearchComp';
 import SearchResults from './_components/SearchResults';
 
 const Search = (): JSX.Element => {
   const { search } = useLocation();
-  const { data, query, search: triggerReload } = searchStore((e) => e);
+  const { data, query, search: triggerReload } = githubStore((e) => e);
 
   useEffect(() => {
     if (search) {
@@ -22,7 +22,11 @@ const Search = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  useSetPageTitle(query?.q ? `Code . ${query?.q}` : 'Code Search User');
+  useEffect(() => {
+    appStore.setState({
+      pageTitle: query?.q ? `Code . ${query?.q}` : 'Code Search User',
+    });
+  }, [query?.q]);
 
   return (
     <Box px={20}>

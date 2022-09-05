@@ -13,11 +13,11 @@ import {
 import { useForm } from 'react-hook-form';
 import { FiSearch } from 'react-icons/fi';
 import { Link as ReactLink } from 'react-router-dom';
-import { searchStore } from 'stores/search';
+import { githubStore } from 'stores/github';
 
 const SearchComp = () => {
   const buttonColor = useColorModeValue('brand.200', 'brand.100');
-  const { search, query } = searchStore();
+  const { search, query } = githubStore();
   const {
     register,
     handleSubmit,

@@ -21,7 +21,7 @@ import { RiGitRepositoryLine } from 'react-icons/ri';
 import Logo32 from 'assets/images/GitHub-Mark-32px.png';
 import LogoLight32 from 'assets/images/GitHub-Mark-Light-32px.png';
 
-import { searchStore } from 'stores/search';
+import { githubStore } from 'stores/github';
 import Loading from '../Loading';
 
 const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
@@ -30,7 +30,7 @@ const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
   onToggle,
 }) => {
   const logo = useColorModeValue(Logo32, LogoLight32);
-  const { isLoading, userInfo, getUser } = searchStore();
+  const { isLoading, userDetails, getUser } = githubStore();
 
   useEffect(() => {
     getUser(login);
@@ -40,7 +40,7 @@ const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
     return <Loading login={login} />;
   }
 
-  if (userInfo) {
+  if (userDetails) {
     return (
       <Stack>
         <HStack>
@@ -58,7 +58,7 @@ const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
               <Icon as={FiUser} boxSize={4} />
               <Text>{login}</Text>
             </HStack>
-            <Link href={userInfo?.html_url} rel="noreferrer" target="_blank">
+            <Link href={userDetails?.html_url} rel="noreferrer" target="_blank">
               <HStack>
                 <Image src={logo} alt="logo" boxSize={4} />
                 <Text>View Profile</Text>
@@ -66,33 +66,33 @@ const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
             </Link>
             <HStack>
               <Icon as={FiUsers} boxSize={4} />
-              <Text>{userInfo?.followers} followers</Text>
+              <Text>{userDetails?.followers} followers</Text>
             </HStack>
             <HStack>
               <Icon as={FiUsers} boxSize={4} />
-              <Text>{userInfo?.following} following</Text>
+              <Text>{userDetails?.following} following</Text>
             </HStack>
-            {userInfo?.location && (
+            {userDetails?.location && (
               <HStack>
                 <Icon as={GoLocation} boxSize={4} />
-                <Text>{userInfo.location}</Text>
+                <Text>{userDetails.location}</Text>
               </HStack>
             )}
             <HStack>
               <Icon as={RiGitRepositoryLine} boxSize={4} />
-              <Text>{userInfo?.public_repos} public repos</Text>
+              <Text>{userDetails?.public_repos} public repos</Text>
             </HStack>
-            {userInfo?.blog && (
-              <Link href={userInfo.blog} rel="noreferrer" target="_blank">
+            {userDetails?.blog && (
+              <Link href={userDetails.blog} rel="noreferrer" target="_blank">
                 <HStack>
                   <Icon as={BiLinkExternal} boxSize={4} />
                   <Text>Blog</Text>
                 </HStack>
               </Link>
             )}
-            {userInfo?.twitter_username && (
+            {userDetails?.twitter_username && (
               <Link
-                href={`https://www.twitter.com/${userInfo.twitter_username}`}
+                href={`https://www.twitter.com/${userDetails.twitter_username}`}
                 rel="noreferrer"
                 target="_blank"
               >
@@ -105,9 +105,9 @@ const FullInfo: FC<{ login: string; avatar: string; onToggle: () => void }> = ({
           </Grid>
         </HStack>
         <Stack>
-          {userInfo?.name && <Text>{userInfo?.name}</Text>}
-          {userInfo?.email && <Text>{userInfo?.email}</Text>}
-          {userInfo?.bio && <Text>{userInfo?.bio}</Text>}
+          {userDetails?.name && <Text>{userDetails?.name}</Text>}
+          {userDetails?.email && <Text>{userDetails?.email}</Text>}
+          {userDetails?.bio && <Text>{userDetails?.bio}</Text>}
           <Flex
             role="button"
             align="center"

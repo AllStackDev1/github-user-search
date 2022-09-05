@@ -1,3 +1,6 @@
+export interface IAppStore {
+  pageTitle: string;
+}
 export interface IUser {
   login: string;
   id: number;
@@ -20,13 +23,13 @@ export interface IUser {
   site_admin: boolean;
 }
 
-export interface ISearchPayload {
+export interface ISearchResonse {
   total_count: number;
   incomplete_results: boolean;
   items: IUser[];
 }
 
-export interface IUserInfo {
+export interface IUserDetails {
   login: string;
   id: number;
   node_id: string;
@@ -66,13 +69,15 @@ export interface IQueryPayload {
   page: number;
   per_page: number;
 }
-export interface ISearchStore {
+export interface IGithubStore {
   error?: string;
+  clear: () => void;
+  searchKey?: string;
   isLoading?: boolean;
   query: IQueryPayload;
-  searchKey: string;
-  data: ISearchPayload | null;
-  userInfo?: IUserInfo | null;
+  data?: ISearchResonse;
+  userDetails?: IUserDetails;
+  cached_users_details: IUserDetails[];
   getUser: (username: string) => Promise<void>;
   search: (query: IQueryPayload) => Promise<void>;
 }
